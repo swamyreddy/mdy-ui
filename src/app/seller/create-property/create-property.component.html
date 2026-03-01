@@ -1,0 +1,593 @@
+<!-- <div class="toast align-items-center  bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="d-flex">
+      <div class="toast-body">
+        Hello, world! This is a toast message.
+      </div>
+      <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+  </div> -->
+<div class="page-header" *ngIf="!isEditMode">
+  <h3>Post a Property</h3>
+  <h6>Enter property details below</h6>
+</div>
+<div class="mt-3">
+  <form (ngSubmit)="onSubmit()" [formGroup]="propertyCreationForm">
+    <div class="form-check form-switch mb-3">
+      <input
+        class="form-check-input"
+        type="checkbox"
+        id="isMultipleProperties"
+        formControlName="isMultipleProperties"
+      />
+      <label class="form-check-label" for="isMultipleProperties">
+        Is this a Multiple Properties Project?
+      </label>
+    </div>
+
+    <div formGroupName="propertyData">
+      <!-- 🔥 Toggle for Multiple Properties -->
+
+      <div
+        class="form-group mb-3 mt-3"
+        [ngClass]="
+          propertyCreationForm.get('propertyData.title')?.valid &&
+          propertyCreationForm.get('propertyData.title')?.touched
+            ? 'was-validated'
+            : ''
+        "
+      >
+        <label for="title">Project Name</label>
+        <input
+          type="text"
+          name="title"
+          id="title"
+          class="form-control"
+          required
+          formControlName="title"
+        />
+        <span
+          class="is-invalid invalid-feedback"
+          *ngIf="
+            propertyCreationForm.get('propertyData.title')?.errors?.required &&
+            propertyCreationForm.get('propertyData.title')?.touched
+          "
+        >
+          Please enter Project Name!
+        </span>
+        <span
+          class="is-invalid invalid-feedback"
+          *ngIf="
+            propertyCreationForm.get('propertyData.title')?.errors
+              ?.existingTitles &&
+            propertyCreationForm.get('propertyData.title')?.touched
+          "
+        >
+          Project Name already exists!
+        </span>
+      </div>
+    </div>
+    <div
+      class="form-group mb-3"
+      [ngClass]="
+        propertyCreationForm.get('propertyType')?.valid &&
+        propertyCreationForm.get('propertyType')?.touched
+          ? 'was-validated'
+          : ''
+      "
+    >
+      <label class="d-block mb-2 pb-1 form-label" for="propertyType"
+        >Property Type <span class="text-danger">*</span> :
+      </label>
+
+      <div
+        role="group"
+        class="btn-group btn-group-sm flex-wrap"
+        aria-label="Basic radio toggle button group"
+      >
+        <div
+          *ngFor="let item of filteredPropertyTypes; let i = index"
+          class="mb-2"
+        >
+          <input
+            type="radio"
+            class="btn-check"
+            name="propertyType"
+            id="propertyType{{ i }}"
+            value="{{ item.id }}"
+            formControlName="propertyType"
+            autocomplete="off"
+            [checked]="propertyCreationForm.value.propertyType === item.id"
+          />
+          <label class="btn btn-outline-secondary" for="propertyType{{ i }}">{{
+            item.name
+          }}</label>
+        </div>
+        <span
+          class="is-invalid invalid-feedback"
+          *ngIf="
+            !propertyCreationForm.get('propertyType')?.valid &&
+            propertyCreationForm.get('propertyType')?.touched
+          "
+        >
+          Please select Property Type!
+        </span>
+      </div>
+    </div>
+    <div *ngIf="isRequired('floorPlans')">
+      <label>
+        Unit Inventory Management <span class="text-danger">*</span>
+      </label>
+
+      <div>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Type</th>
+                <th>Space</th>
+                <th>Price</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let unit of floorPlans.controls; let i = index">
+                <td>{{ unit.value.unitName }}</td>
+                <td>{{ unit.value.unitSpace }}</td>
+                <td>{{ unit.value.unitPrice }} Cr</td>
+                <td>
+                  <button class="btn btn-sm btn-danger" (click)="removeUnit(i)">
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="d-flex justify-content-end mt-3">
+          <button
+            type="button"
+            (click)="openManageUnitsModal()"
+            class="btn btn-primary px-4"
+          >
+            + Add Unit Type
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="form-group mb-3"
+      *ngIf="!isMultiplePropertiesProject"
+      [ngClass]="
+        propertyCreationForm.get('unitType')?.valid &&
+        propertyCreationForm.get('unitType')?.touched
+          ? 'was-validated'
+          : ''
+      "
+    >
+      <label class="d-block mb-2 pb-1 form-label" for="unitType"
+        >Unit Type <span class="text-danger">*</span> :
+      </label>
+      <div
+        role="group"
+        class="btn-group btn-group-sm"
+        aria-label="Basic radio toggle button group"
+      >
+        <div *ngFor="let item of unitTypes; let i = index">
+          <input
+            type="radio"
+            class="btn-check"
+            name="unitType"
+            id="unitType{{ i }}"
+            value="{{ item.id }}"
+            formControlName="unitType"
+            autocomplete="off"
+            checked
+          />
+          <label class="btn btn-outline-secondary" for="unitType{{ i }}">{{
+            item.name
+          }}</label>
+        </div>
+      </div>
+    </div>
+    <div
+      class="form-group mb-3"
+      *ngIf="!isMultiplePropertiesProject"
+      [ngClass]="
+        propertyCreationForm.get('bathRooms')?.valid &&
+        propertyCreationForm.get('bathRooms')?.touched
+          ? 'was-validated'
+          : ''
+      "
+    >
+      <label class="d-block mb-2 pb-1 form-label" for="bathRooms"
+        >Number of Bathrooms <span class="text-danger">*</span> :
+      </label>
+
+      <select class="form-select" formControlName="bathRooms">
+        <option value="" disabled>Select No of Bathrooms</option>
+        <option
+          *ngFor="let item of numberOfBathrooms; let i = index"
+          value="{{ item }}"
+        >
+          {{ item }} Bathrooms
+        </option>
+      </select>
+    </div>
+    <div
+      class="form-group mb-3"
+      [ngClass]="
+        propertyCreationForm.get('price')?.valid &&
+        propertyCreationForm.get('price')?.touched
+          ? 'was-validated'
+          : ''
+      "
+    >
+      <label for="price">Price</label>
+      <input
+        type="text"
+        name="price"
+        id="price"
+        class="form-control"
+        required
+        formControlName="price"
+      />
+      <span
+        class="is-invalid invalid-feedback"
+        *ngIf="
+          propertyCreationForm.get('price')?.errors?.required &&
+          propertyCreationForm.get('price')?.touched
+        "
+      >
+        Please enter Price!
+      </span>
+      <span
+        class="is-invalid invalid-feedback"
+        *ngIf="
+          propertyCreationForm.get('price')?.errors?.invalidNumber &&
+          propertyCreationForm.get('price')?.touched
+        "
+      >
+        Please enter a valid Price!
+      </span>
+    </div>
+    <div class="form-group mb-3" *ngIf="isMultiplePropertiesProject">
+      <label>Project Area</label>
+
+      <div class="d-flex gap-2">
+        <input
+          type="number"
+          formControlName="projectAreaValue"
+          class="form-control"
+          placeholder="Enter area"
+          min="0"
+          step="0.01"
+        />
+
+        <select formControlName="projectAreaUnit" class="form-control">
+          <option value="" disabled selected>Select Unit</option>
+          <option *ngFor="let unit of areaUnits" [value]="unit">
+            {{ unit }}
+          </option>
+        </select>
+      </div>
+
+      <small
+        *ngIf="
+          propertyCreationForm.get('projectAreaValue')?.touched &&
+          propertyCreationForm.get('projectAreaValue')?.errors?.['required']
+        "
+      >
+        Project area is required
+      </small>
+    </div>
+    <div
+      class="form-group mb-3 mt-3"
+      *ngIf="!isMultiplePropertiesProject"
+      [ngClass]="
+        propertyCreationForm.get('propertyData.builtupArea')?.valid &&
+        propertyCreationForm.get('propertyData.builtupArea')?.touched
+          ? 'was-validated'
+          : ''
+      "
+    >
+      <label for="title">Builtup Area (Sq.ft)</label>
+      <input
+        type="text"
+        name="builtupArea"
+        id="builtupArea"
+        class="form-control"
+        required
+        formControlName="builtupArea"
+      />
+      <span
+        class="is-invalid invalid-feedback"
+        *ngIf="
+          propertyCreationForm.get('propertyData.builtupArea')?.errors
+            ?.required &&
+          propertyCreationForm.get('propertyData.builtupArea')?.touched
+        "
+      >
+        Please enter Builtup Area!
+      </span>
+    </div>
+    <div
+      class="form-group mb-3 mt-3"
+      *ngIf="!isMultiplePropertiesProject"
+      [ngClass]="
+        propertyCreationForm.get('propertyData.carpetArea')?.valid &&
+        propertyCreationForm.get('propertyData.carpetArea')?.touched
+          ? 'was-validated'
+          : ''
+      "
+    >
+      <label for="title">Carpet Area (Sq.ft)</label>
+      <input
+        type="text"
+        name="carpetArea"
+        id="carpetArea"
+        class="form-control"
+        required
+        formControlName="carpetArea"
+      />
+      <span
+        class="is-invalid invalid-feedback"
+        *ngIf="
+          propertyCreationForm.get('propertyData.carpetArea')?.errors
+            ?.required &&
+          propertyCreationForm.get('propertyData.carpetArea')?.touched
+        "
+      >
+        Please enter Carpet Area!
+      </span>
+    </div>
+    <div class="form-group mb-3">
+      <label for="propertyAge">Property Age (Years)</label>
+
+      <input
+        type="number"
+        id="propertyAge"
+        formControlName="propertyAge"
+        class="form-control"
+        placeholder="Enter property age"
+        min="0"
+      />
+
+      <div *ngIf="propertyCreationForm.get('propertyAge')?.touched">
+        <small
+          *ngIf="propertyCreationForm.get('propertyAge')?.errors?.['required']"
+        >
+          Property age is required
+        </small>
+        <small *ngIf="propertyCreationForm.get('propertyAge')?.errors?.['min']">
+          Age cannot be negative
+        </small>
+      </div>
+    </div>
+    <div class="form-group mb-3">
+      <label for="totalFloors">Total Floors</label>
+
+      <input
+        type="number"
+        id="totalFloors"
+        formControlName="totalFloors"
+        class="form-control"
+        placeholder="Enter total floors"
+        min="1"
+      />
+
+      <div *ngIf="propertyCreationForm.get('totalFloors')?.touched">
+        <small
+          *ngIf="propertyCreationForm.get('totalFloors')?.errors?.['required']"
+        >
+          Total floors is required
+        </small>
+        <small *ngIf="propertyCreationForm.get('totalFloors')?.errors?.['min']">
+          Must be at least 1
+        </small>
+      </div>
+    </div>
+    <div class="form-group mb-3">
+      <label for="facing">Facing</label>
+
+      <select id="facing" formControlName="facing" class="form-control">
+        <option value="" disabled selected>Select Facing</option>
+        <option *ngFor="let direction of facingOptions" [value]="direction">
+          {{ direction }}
+        </option>
+      </select>
+
+      <div *ngIf="propertyCreationForm.get('facing')?.touched">
+        <small *ngIf="propertyCreationForm.get('facing')?.errors?.['required']">
+          Facing is required
+        </small>
+      </div>
+    </div>
+    <div
+      class="form-group mb-3"
+      [ngClass]="
+        propertyCreationForm.get('location')?.valid &&
+        propertyCreationForm.get('location')?.touched
+          ? 'was-validated'
+          : ''
+      "
+    >
+      <label for="location">Location</label>
+      <input
+        type="text"
+        name="location"
+        id="location"
+        class="form-control"
+        required
+        formControlName="location"
+      />
+      <span
+        class="is-invalid invalid-feedback"
+        *ngIf="
+          propertyCreationForm.get('location')?.errors?.required &&
+          propertyCreationForm.get('location')?.touched
+        "
+      >
+        Please enter Location Name!
+      </span>
+      <span
+        class="is-invalid invalid-feedback"
+        *ngIf="
+          propertyCreationForm.get('location')?.errors?.locationNotAllowed &&
+          propertyCreationForm.get('location')?.touched
+        "
+      >
+        This location is not allowed!
+      </span>
+      <span
+        class="is-invalid invalid-feedback"
+        *ngIf="
+          propertyCreationForm.get('location')?.errors?.maximumLengthReached &&
+          propertyCreationForm.get('location')?.touched
+        "
+      >
+        Maximum length reached!
+      </span>
+    </div>
+    <div formArrayName="selectedAmenities" class="amenities-list">
+      <label class="form-label fw-bold">Select Amenities</label>
+      <div class="mb-3">
+        <div
+          class="form-check form-check-inline"
+          *ngFor="let amenity of amenities"
+        >
+          <input
+            class="form-check-input"
+            type="checkbox"
+            [checked]="selectedAmenityIds.includes(amenity.id)"
+            [value]="amenity.id"
+            (change)="onAmenityChange($event)"
+            id="{{ amenity.id }}"
+          />
+          <label class="form-check-label" [for]="amenity.id">
+            {{ amenity.name }}
+          </label>
+        </div>
+      </div>
+    </div>
+    <div
+      class="form-group mb-3"
+      [ngClass]="
+        propertyCreationForm.get('defaultPic')?.valid &&
+        propertyCreationForm.get('defaultPic')?.touched
+          ? 'was-validated'
+          : ''
+      "
+    >
+      <div>
+        <label class="form-label fw-bold">Property Photos</label>
+      </div>
+      <label for="defaultPic">Property Cover Image</label>
+      <input
+        type="file"
+        name="defaultPic"
+        #defaultPic
+        (change)="uploadFile($event, 'defaultPic')"
+        class="form-control"
+        required
+      />
+      <span
+        class="is-invalid invalid-feedback"
+        *ngIf="
+          !propertyCreationForm.get('defaultPic')?.valid &&
+          propertyCreationForm.get('defaultPic')?.touched
+        "
+      >
+        Please upload Project Image!
+      </span>
+    </div>
+    <div class="mb-3">
+      <label for="propertyPhotos" class="form-label"
+        >Photos of the Property</label
+      >
+      <input
+        type="file"
+        multiple
+        #propertyPhotosInput
+        class="form-control"
+        id="propertyPhotos"
+        (change)="onUploadPhotos($event)"
+      />
+      <div formArrayName="propertyPhotos" class="row">
+        <ul class="list-group" *ngIf="propertyPhotos.controls.length > 0">
+          <li
+            class="list-group-item d-flex align-items-start gap-3 flex-column flex-md-row"
+            *ngFor="let photo of propertyPhotos.controls; let i = index"
+            [formGroupName]="i"
+          >
+            <div class="d-flex align-items-center gap-3">
+              <img
+                [src]="photo.get('preview')?.value"
+                alt="Preview"
+                width="80"
+                height="80"
+                style="object-fit: cover"
+                class="rounded border"
+              />
+              <div class="flex-grow-1">
+                <input
+                  type="text"
+                  formControlName="title"
+                  class="form-control form-control-sm"
+                  placeholder="Enter new file name"
+                />
+                <button
+                  type="button"
+                  class="btn btn-sm btn-outline-danger"
+                  (click)="removeSelectedFiles(i)"
+                >
+                  Remove
+                </button>
+                <small class="text-muted"
+                  >Original: {{ photo.get("fileName")?.value }}</small
+                >
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="description">Property Description</label>
+
+      <textarea
+        id="description"
+        formControlName="description"
+        rows="5"
+        class="form-control"
+        placeholder="Describe the property, amenities, location highlights..."
+      ></textarea>
+
+      <small class="text-muted">
+        {{ propertyCreationForm.get("description")?.value?.length || 0 }}/1000
+        characters
+      </small>
+
+      <div
+        class="error"
+        *ngIf="propertyCreationForm.get('description')?.touched"
+      >
+        <small
+          *ngIf="propertyCreationForm.get('description')?.errors?.['required']"
+        >
+          Description is required
+        </small>
+
+        <small
+          *ngIf="propertyCreationForm.get('description')?.errors?.['minlength']"
+        >
+          Minimum 20 characters required
+        </small>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+
+<app-gobal-modal #globalModal></app-gobal-modal>

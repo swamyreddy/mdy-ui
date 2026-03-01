@@ -1,0 +1,185 @@
+/* ==================================== */
+/* Search Bar Component Styling */
+/* ==================================== */
+
+/* Main container for the search bar */
+.search-bar {
+  padding: 15px 20px; /* Generous internal padding */
+}
+
+.search-bar .tab-content {
+  padding: 10px 15px 15px 15px;
+}
+.search-bar.tabs {
+  padding-left: 10px;
+}
+.search-bar .tab-item {
+  padding: 10px;
+  background: #9b53b5;
+}
+.search-bar .tab-content,
+.search-bar .tab-item.active,
+.btn-check:checked + .btn {
+  background: #f7f7f7;
+  color: #000 !important;
+}
+
+/* On screens larger than tablet, center the content for better aesthetics */
+@media (min-width: 992px) {
+  .search-bar {
+    /* max-width: 900px;  */
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+.search-bar .btn-danger {
+  background: #000 !important;
+  padding: 11px 15px !important;
+  border-radius: 0px !important;
+}
+
+/* ==================================== */
+/* Input and Select Field Styling */
+/* ==================================== */
+
+.form-control,
+.form-select {
+  height: 52px; /* Slightly taller for modern feel */
+  border-radius: 0rem; /* Consistent rounded corners */
+  border: none; /* Lighter, subtle border */
+  font-size: 1rem; /* Standard readable font size */
+  color: #333; /* Darker text for readability */
+  padding-left: 15px; /* Good internal padding */
+  transition:
+    border-color 0.2s ease-in-out,
+    box-shadow 0.2s ease-in-out;
+  -webkit-appearance: none; /* Remove default browser styling for selects */
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.form-control::placeholder {
+  color: #888; /* Slightly darker placeholder for visibility */
+  opacity: 1; /* Ensure consistency across browsers */
+}
+
+/* Focus state for inputs and selects */
+.form-control:focus,
+.form-select:focus {
+  border-color: #007bff; /* Primary blue focus */
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.15); /* Softer focus shadow */
+  outline: 0; /* Remove default outline */
+}
+
+/* On smaller screens, add a bit more vertical spacing between stacked elements */
+@media (max-width: 991.98px) {
+  .search-bar .row > div {
+    margin-bottom: 15px; /* Add vertical space between stacked controls */
+  }
+  .search-bar .row > div:last-child {
+    margin-bottom: 0; /* No margin after the last element (the button) */
+  }
+}
+.autocomplete-list {
+  position: absolute; /* Position the list relative to its parent .col-lg-3 */
+  top: 100%; /* Place it right below the input field */
+  left: 12px; /* Adjust for padding/gutter */
+  right: 12px; /* Adjust for padding/gutter */
+  z-index: 1050; /* Ensure it floats above other elements */
+  max-height: 200px; /* Prevent it from getting too long */
+  overflow-y: auto; /* Enable scrolling if max-height is reached */
+  border: 1px solid #ddd;
+  border-top: none; /* Make it visually continuous with the input field */
+  border-radius: 0 0 0.5rem 0.5rem; /* Only bottom corners rounded */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  list-style: none; /* Remove bullet points */
+  padding: 0;
+  margin: 0;
+  background-color: #fff;
+}
+
+.autocomplete-list .list-group-item {
+  cursor: pointer;
+  padding: 10px 15px;
+  border-left: none;
+  border-right: none;
+  border-bottom: 1px solid #eee;
+  transition: background-color 0.15s ease-in-out;
+}
+
+.autocomplete-list .list-group-item:last-child {
+  border-bottom: none;
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+}
+
+.btn-group .btn {
+  border-radius: 0;
+  font-weight: 500;
+  padding: 0.6rem 10px 0rem;
+  margin-bottom: 0.3rem;
+  border: none !important;
+  padding-top: 0;
+}
+.btn-group label {
+  font-size: 14px;
+  color: #fff !important;
+}
+.btn-group.active label {
+  color: #000 !important;
+}
+
+.btn-group .btn:first-child {
+  border-top-left-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+}
+
+.btn-group .btn:last-child {
+  border-top-right-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+}
+.header-search-input input {
+  height: 34px !important;
+  border-radius: 0 !important;
+  text-indent: 20px;
+}
+.header-search-input i {
+  position: absolute;
+  top: 10px;
+  left: 8px;
+}
+.search-bar {
+  transition:
+    background 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+/* Apartment */
+.search-bar.apartment {
+  /* background: linear-gradient(135deg, #e3f2fd, #ffffff); */
+}
+
+/* Villa */
+.search-bar.villa {
+  /* background: linear-gradient(135deg, #fff3e0, #ffffff); */
+}
+
+/* Independent House */
+.search-bar.independenthouse {
+  /* background: linear-gradient(135deg, #e8f5e9, #ffffff); */
+}
+
+/* Studio */
+.search-bar.studio {
+  /* background: linear-gradient(135deg, #f3e5f5, #ffffff); */
+}
+
+/* Plot */
+.search-bar.plot {
+  /* background: linear-gradient(135deg, #ede7f6, #ffffff); */
+}
+
+/* FarmLand */
+.search-bar.formland {
+  /* background: linear-gradient(135deg, #f1f8e9, #ffffff); */
+}

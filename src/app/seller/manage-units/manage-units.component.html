@@ -1,0 +1,111 @@
+<div>
+  <form [formGroup]="unitForm">
+    <div class="row">
+      <!-- Unit Type -->
+      <div class="col-md-4 mb-3">
+        <label class="form-label">Unit Type</label>
+        <!-- <input
+          type="text"
+          class="form-control"
+          formControlName="unitName"
+          placeholder="e.g. 3 BHK"
+        /> -->
+        <div>
+          <select
+            formControlName="unitName"
+            name="unitType"
+            class="form-select"
+            placeholder="Select Unity Type"
+          >
+            <option value="" disabled>Select Unit Type</option>
+            <option
+              *ngFor="let item of unitTypes; let i = index"
+              value="{{ item.id }}"
+            >
+              {{ item.name }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Unit Space -->
+      <div class="col-md-4 mb-3">
+        <label class="form-label">Unit Space (Sq.Ft)</label>
+        <input
+          type="number"
+          class="form-control"
+          formControlName="unitSpace"
+          placeholder="e.g. 1775"
+        />
+      </div>
+
+      <!-- Unit Price -->
+      <div class="col-md-4 mb-3">
+        <label class="form-label">Unit Price (Cr)</label>
+        <input
+          type="number"
+          step="0.01"
+          class="form-control"
+          formControlName="unitPrice"
+          placeholder="e.g. 1.24"
+        />
+      </div>
+    </div>
+
+    <!-- Floor Plan Upload -->
+    <!-- Drag & Drop Upload Area -->
+    <div
+      class="upload-box text-center p-4 mt-3"
+      [class.dragging]="isDragging"
+      (dragover)="onDragOver($event)"
+      (dragleave)="onDragLeave($event)"
+      (drop)="onDrop($event)"
+    >
+      <input
+        type="file"
+        class="d-none"
+        #fileInput
+        (change)="onFileSelect($event)"
+      />
+
+      <div *ngIf="!floorPlanPreview">
+        <p class="mb-2 fw-semibold">Drag & Drop Floor Plan Here</p>
+        <p class="text-muted">or</p>
+        <button
+          type="button"
+          class="btn btn-outline-primary"
+          (click)="fileInput.click()"
+        >
+          Browse File
+        </button>
+      </div>
+
+      <div *ngIf="floorPlanPreview">
+        <img
+          [src]="floorPlanPreview"
+          class="img-fluid rounded border"
+          style="max-height: 250px"
+        />
+
+        <div class="mt-2">
+          <button
+            type="button"
+            class="btn btn-sm btn-danger"
+            (click)="removeImage()"
+          >
+            Remove
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- Footer -->
+    <div class="text-end">
+      <button type="button" class="btn btn-secondary me-2" (click)="cancel()">
+        Cancel
+      </button>
+      <button type="button" class="btn btn-primary" (click)="save()">
+        Save
+      </button>
+    </div>
+  </form>
+</div>

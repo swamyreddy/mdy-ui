@@ -1,0 +1,43 @@
+.hero-bg {
+  background: url("https://placehold.co/1920x800/20344b/white?text=Modern+Villa+Background")
+    no-repeat center center;
+  background-size: cover;
+  min-height: 70vh;
+  position: relative;
+}
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4); /* Dark overlay */
+}
+.card-property {
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+.card-property:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
+}
+.dark-section {
+  background-color: #1f2937; /* Very dark gray/black */
+}
+.dark-section a {
+  color: #fff;
+}
+.bg_image {
+  background: #f6f7f9;
+  /* background: linear-gradient(
+    180deg,
+    rgba(120, 153, 185, 1) 0%,
+    rgba(217, 221, 222, 1) 50%,
+    rgba(217, 221, 222, 1) 100%
+  ); */
+}
+footer {
+  float: left;
+  width: 100%;
+}

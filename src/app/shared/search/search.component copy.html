@@ -1,0 +1,71 @@
+<div class="search-bar bg-white shadow-sm p-3 p-md-4 rounded-3">
+  <form [formGroup]="searchForm" (ngSubmit)="onSubmitSearch()">
+    <div class="row align-items-center g-3 g-lg-0">
+      <div class="col-12 col-lg-3 position-relative">
+        <label for="city-select" class="visually-hidden">City</label>
+        <input
+          type="text"
+          id="location-input"
+          class="form-control"
+          placeholder="City/Locality"
+          formControlName="city"
+          autocomplete="off"
+          (focus)="onInputFocus()"
+          (blur)="onInputBlur()"
+        />
+        <ul
+          class="autocomplete-list list-group"
+          *ngIf="
+            showLocationDropdown &&
+            searchForm.get('city')?.value &&
+            (filteredLocations$ | async)?.length
+          "
+        >
+          <li
+            class="list-group-item list-group-item-action"
+            *ngFor="let location of filteredLocations$ | async"
+            (click)="selectLocation(location)"
+          >
+            {{ location }}
+          </li>
+        </ul>
+      </div>
+
+      <div class="col-12 col-lg-3">
+        <label for="type-select" class="visually-hidden">Property Type</label>
+        <select
+          id="type-select"
+          class="form-select"
+          formControlName="propertyType"
+        >
+          <option *ngFor="let type of propertyTypes" [value]="type">
+            {{ type }}
+          </option>
+        </select>
+      </div>
+
+      <div class="col-12 col-lg-4">
+        <label for="price-range-select" class="visually-hidden"
+          >Price Range</label
+        >
+        <select
+          id="price-range-select"
+          class="form-select"
+          formControlName="priceRange"
+        >
+          <option *ngFor="let range of priceRanges" [value]="range.value">
+            {{ range.label }}
+          </option>
+        </select>
+      </div>
+
+      <div class="col-12 col-lg-2">
+        <div class="d-grid">
+          <button type="submit" class="btn btn-primary">
+            <i class="bi bi-search"></i> Search
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

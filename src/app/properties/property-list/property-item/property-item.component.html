@@ -1,0 +1,56 @@
+<!-- <a (click)="onSelectProperty(item.id)">
+  <div class="card property-card h-100">
+    <div class="property-image-container">
+      <img
+        [src]="
+          item.defaultPic ||
+          'https://teja12.kuikr.com/is/a/c/570x430/gallery_images/original/cf5e4676ef4b9ca.gif'
+        "
+        style="max-height: 140px"
+      />
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">{{ item.title }}</h5>
+      <p class="card-text card-text-price flex-grow-1">{{ item.price }}</p>
+      <p class="card-text card-text-location mb-0">{{ item.location }}</p>
+    </div>
+  </div>
+</a> -->
+<a (click)="onSelectProperty(item.id)">
+  <div class="card card-property border-0 rounded-xl overflow-hidden shadow">
+    <img
+      [src]="
+        item.defaultPicUrl ||
+        'https://teja12.kuikr.com/is/a/c/570x430/gallery_images/original/cf5e4676ef4b9ca.gif'
+      "
+      class="card-img-top"
+      alt="Luxury Villa"
+    />
+    <div class="card-body p-4">
+      <h5 class="card-title text-lg font-semibold text-gray-800">
+        {{ item.title }}
+      </h5>
+      <div class="card-captions">
+        <p class="text-sm text-gray-500 mb-2">
+          {{ item.price }} | <span class="text-success fw-bold">For Sale</span>
+        </p>
+        <p class="text-sm text-gray-500 mb-2">
+          {{ item.location }}
+        </p>
+        <div class="d-flex justify-content-between text-gray-400 text-md">
+          <span
+            ><i class="fas fa-bed me-1"></i>
+            {{ item.unitType || 0 }} Bedrooms</span
+          >
+          <!-- <span
+            ><i class="fas fa-bath me-1"></i> {{ item.bathRooms }} Baths</span
+          > -->
+          <!-- <span
+            ><i class="fas fa-ruler-combined me-1"></i>
+            {{ item.builtupArea }} sqft</span
+          > -->
+        </div>
+      </div>
+    </div>
+  </div>
+</a>

@@ -1,0 +1,32 @@
+.navbar-brand img {
+  max-height: 50px;
+  position: relative;
+  top: -5px;
+}
+.header-menu {
+  position: absolute;
+  top: 75px;
+  width: 100%;
+}
+.bg-menu {
+  background: #1f2937 !important;
+}
+.dropdown-toggle::after {
+  display: none !important;
+}
+
+.logo-text {
+  font-family: "ROBOTO";
+}
+.header {
+  z-index: 2;
+  position: relative;
+  background: linear-gradient(90deg, #fc466b 0%, #3f5efb 100%);
+}
+
+.navbar-expand-lg {
+  padding: 4px 0px;
+}
+li.nav-item {
+  line-height: 34px !important;
+}

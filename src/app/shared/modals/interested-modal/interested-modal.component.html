@@ -1,0 +1,131 @@
+<!-- Backdrop -->
+<div
+  class="modal-backdrop"
+  [ngClass]="isVisible ? 'show' : ''"
+  *ngIf="isVisible"
+></div>
+
+<!-- Modal -->
+<div
+  class="modal fade d-block"
+  [ngClass]="isVisible ? 'show' : ''"
+  *ngIf="isVisible"
+  tabindex="-1"
+  role="dialog"
+  style="z-index: 1050"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Basic Information</h5>
+        <button
+          type="button"
+          class="btn-close"
+          (click)="closeModal()"
+          aria-label="Close"
+        ></button>
+      </div>
+
+      <div class="modal-body">
+        <div *ngIf="!contactVisible">
+          <form [formGroup]="form" (ngSubmit)="submit()">
+            <!-- Reason -->
+            <div class="mb-3">
+              <label class="form-label d-block">Your reason to buy is</label>
+              <div class="form-check form-check-inline">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  value="Investment"
+                  formControlName="reason"
+                  name="reason"
+                />
+                <label class="form-check-label">Investment</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  value="Self Use"
+                  formControlName="reason"
+                  name="reason"
+                />
+                <label class="form-check-label">Self Use</label>
+              </div>
+            </div>
+
+            <!-- Dealer -->
+            <div class="mb-3">
+              <label class="form-label d-block"
+                >Are you a property dealer?</label
+              >
+              <div class="form-check form-check-inline">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  value="Yes"
+                  formControlName="dealer"
+                  name="dealer"
+                />
+                <label class="form-check-label">Yes</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  value="No"
+                  formControlName="dealer"
+                  name="dealer"
+                />
+                <label class="form-check-label">No</label>
+              </div>
+            </div>
+
+            <!-- Name -->
+            <div class="mb-3">
+              <label class="form-label">Name</label>
+              <input
+                class="form-control"
+                placeholder="Name"
+                formControlName="name"
+              />
+            </div>
+
+            <!-- Phone -->
+            <div class="mb-3">
+              <label class="form-label">Phone</label>
+              <div class="input-group">
+                <span class="input-group-text">+91</span>
+                <input
+                  class="form-control"
+                  placeholder="Phone Number"
+                  formControlName="phone"
+                />
+              </div>
+            </div>
+
+            <!-- Email -->
+            <div class="mb-3">
+              <label class="form-label">Email</label>
+              <input
+                class="form-control"
+                placeholder="Email"
+                formControlName="email"
+              />
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-primary" type="submit">Submit</button>
+            </div>
+          </form>
+        </div>
+        <div *ngIf="contactVisible">
+          <p class="text-success fw-bold">
+            Thank you! Here is the contact information:
+          </p>
+          <p><strong>Phone:</strong> {{ contactInfo.name }}</p>
+          <p><strong>Email:</strong> {{ contactInfo.phone }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

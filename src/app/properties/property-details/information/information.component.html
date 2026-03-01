@@ -1,0 +1,103 @@
+<div class="mt-2">
+  <div class="row">
+    <div class="col-5 text-center">
+      <img
+        [src]="property?.defaultPicUrl"
+        style="max-width: 100%; max-height: 400px"
+      />
+    </div>
+    <div class="col">
+      <div class="row">
+        <div class="col-6 mb-3">
+          <div class="ms-2 me-auto" *ngIf="property?.isMultipleProperties">
+            Project Area
+            <div class="fw-bold">
+              {{ property?.projectAreaValue }} {{ property?.projectAreaUnit }}
+            </div>
+          </div>
+        </div>
+        <div class="col-6 mb-3" *ngIf="!property?.isMultipleProperties">
+          <div class="ms-2 me-auto">
+            Builtup Area
+            <div class="fw-bold">{{ property?.builtupArea }}</div>
+          </div>
+        </div>
+        <div class="col-6 mb-3" *ngIf="!property?.isMultipleProperties">
+          <div class="ms-2 me-auto">
+            Carpet Area
+            <div class="fw-bold">{{ property?.carpetArea }} sq.ft</div>
+          </div>
+        </div>
+        <!-- <div class="col-6 mb-3">
+          <div class="ms-2 me-auto">
+            Sizes
+            <div class="fw-bold">1165.00 sq.ft. - 3380.00 sq.ft.</div>
+          </div>
+        </div> -->
+        <!-- <div class="col-6 mb-3">
+          <div class="ms-2 me-auto">
+            Project Size
+            <div class="fw-bold">3 Buildings - 371 units</div>
+          </div>
+        </div> -->
+        <!-- <div class="col-6 mb-3">
+          <div class="ms-2 me-auto">
+            Avg. Price
+            <div class="fw-bold">6.50 K/sq.ft</div>
+          </div>
+        </div> -->
+        <!-- <div class="col-6 mb-3">
+          <div class="ms-2 me-auto">
+            Possession Starts
+            <div class="fw-bold">Dec, 2025</div>
+          </div>
+        </div> -->
+        <div class="col-6 mb-3">
+          <div class="ms-2 me-auto">
+            Configurations
+            <div class="fw-bold">{{ property?.unitType }} BHK</div>
+          </div>
+        </div>
+        <div class="col-6 mb-3">
+          <div class="ms-2 me-auto">
+            Property Age
+            <div class="fw-bold">{{ property?.propertyAge }} years</div>
+          </div>
+        </div>
+        <div class="col-6 mb-3">
+          <div class="ms-2 me-auto">
+            Total Floors
+            <div class="fw-bold">{{ property?.totalFloors }}</div>
+          </div>
+        </div>
+        <!-- <div class="col-6 mb-3">
+          <div class="ms-2 me-auto">
+            Overlooking
+            <div class="fw-bold">Park/Garden</div>
+          </div>
+        </div> -->
+        <div class="col-6 mb-3">
+          <div class="ms-2 me-auto">
+            Facing
+            <div class="fw-bold">{{ property?.facing }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="about-property mt-3">
+    <h5>About Property</h5>
+    <p>
+      {{ property?.description }}
+    </p>
+  </section>
+
+  <!-- <div class="d-sm-flex justify-content-sm-between align-items-center mb-4">
+    <div>
+      <button class="btn btn-primary btn-sm" (click)="sayInterested()">
+        Interested
+      </button>
+    </div>
+  </div> -->
+</div>

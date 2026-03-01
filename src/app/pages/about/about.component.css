@@ -1,0 +1,93 @@
+.about-section {
+  background: #ffffff;
+}
+h1 {
+  font-size: 2.5rem;
+  letter-spacing: -0.5px;
+  color: #1e293b;
+}
+
+h3 {
+  color: #0f172a;
+  margin-bottom: 1rem;
+}
+
+h4 {
+  color: #0f172a;
+}
+
+p {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #475569;
+}
+
+.lead {
+  font-size: 1.2rem;
+  color: #64748b;
+}
+
+img {
+  border-radius: 12px;
+  transition:
+    transform 0.4s ease,
+    box-shadow 0.4s ease;
+}
+img:hover {
+  transform: scale(1.03);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+}
+
+/* What We Do Cards */
+.border {
+  border: 1px solid #e2e8f0 !important;
+  transition: all 0.3s ease;
+  background: #ffffff;
+}
+.border:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.06);
+  border-color: #2563eb !important;
+}
+
+h5 {
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: #1e293b;
+}
+
+p {
+  font-size: 0.95rem;
+}
+
+/* Vision & Mission */
+.bg-light {
+  background: #f8fafc !important;
+  border: 1px solid #e2e8f0;
+  transition: all 0.3s ease;
+}
+.bg-light:hover {
+  background: #ffffff !important;
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.05);
+  border-color: #2563eb;
+}
+
+/* Commitment Section */
+.mx-auto {
+  max-width: 750px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2rem;
+  }
+
+  .lead {
+    font-size: 1rem;
+  }
+
+  img {
+    margin-top: 2rem;
+  }
+}

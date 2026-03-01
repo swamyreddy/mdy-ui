@@ -1,0 +1,51 @@
+<!-- Backdrop -->
+<div
+  class="modal-backdrop"
+  [ngClass]="isOpen || isVisible ? 'show' : ''"
+  *ngIf="isOpen || isVisible"
+  (click)="closeModal()"
+></div>
+
+<!-- Modal -->
+<div class="modal d-block" [ngClass]="isOpen ? 'show' : 'hide'">
+  <div class="modal-header">
+    <h5 class="modal-title">{{ title }}</h5>
+    <button
+      type="button"
+      class="btn-close"
+      (click)="closeModal()"
+      aria-label="Close"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <ng-template #container></ng-template>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-primary" (click)="primaryAction()">Yes</button>
+  </div>
+</div>
+<div
+  class="modal d-block"
+  [ngClass]="isVisible ? 'show' : 'hide'"
+  *ngIf="isVisible"
+  tabindex="-1"
+  role="dialog"
+  style="z-index: 1050"
+>
+  <div class="modal-header">
+    <h5 class="modal-title">Delete Confirmation</h5>
+    <button
+      type="button"
+      class="btn-close"
+      (click)="closeModal()"
+      aria-label="Close"
+    ></button>
+  </div>
+
+  <div class="modal-body">
+    <p>Are you sure you want to delete this product?</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-primary" (click)="primaryAction()">Yes</button>
+  </div>
+</div>

@@ -1,0 +1,26 @@
+<div class="slider-container">
+  <button class="btn btn-light prev" (click)="prevImage()">❮</button>
+
+  <div *ngIf="propertyPhotos?.length > selectedIndex" class="main-image">
+    <img
+      [src]="propertyPhotos[selectedIndex].src"
+      [title]="propertyPhotos[selectedIndex].title"
+      [alt]="propertyPhotos[selectedIndex].title"
+    />
+  </div>
+
+  <button class="btn btn-light next" (click)="nextImage()">❯</button>
+</div>
+<div class="thumbnails mt-3">
+  <div *ngFor="let img of propertyPhotos; let i = index">
+    <img
+      [src]="img.src"
+      [title]="img.title"
+      [alt]="img.title"
+      max-height="300px"
+      [class.active]="i === selectedIndex"
+      (click)="selectImage(i)"
+    />
+    <p>{{ img.title }}</p>
+  </div>
+</div>

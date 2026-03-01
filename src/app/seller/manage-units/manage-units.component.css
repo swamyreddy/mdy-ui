@@ -1,0 +1,11 @@
+.upload-box {
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  transition: 0.3s ease;
+  cursor: pointer;
+}
+
+.upload-box.dragging {
+  border-color: #6f42c1;
+  background-color: #f3f0ff;
+}

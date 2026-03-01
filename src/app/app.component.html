@@ -1,0 +1,154 @@
+<app-header (pageTypeSelected)="onPageTypeSelected($event)"></app-header>
+<app-alert></app-alert>
+<!-- <div class="container"> -->
+<div *ngIf="loadedPageType === 'buyer'">
+  <router-outlet></router-outlet>
+  <!-- <app-properties ></app-properties> -->
+</div>
+<!-- <div class="col-md-12"  *ngIf="loadedPageType === 'seller'">
+            <app-seller></app-seller> -->
+<!-- </div> -->
+<footer class="dark-section text-white pt-4 mt-2">
+  <div class="container">
+    <div class="row g-5">
+      <!-- Brand & Newsletter -->
+      <div class="col-lg-4">
+        <p class="text-gray-400 text-sm mb-4">
+          Are you a property Expert? Join our team to manage exclusive
+          properties.
+        </p>
+        <h6 class="font-semibold mb-3">Get Latest Updates</h6>
+        <form class="d-flex">
+          <input
+            type="email"
+            class="form-control form-control-sm me-2 bg-gray-700 border-0 text-white rounded-pill"
+            placeholder="Your Email"
+          />
+          <button
+            type="submit"
+            class="btn btn-primary btn-sm rounded-pill px-3"
+            style="background-color: #6366f1; border-color: #6366f1"
+          >
+            <i class="fas fa-paper-plane"></i>
+          </button>
+        </form>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="col-6 col-lg-2">
+        <h6 class="font-semibold mb-3">Company</h6>
+        <ul class="list-unstyled text-sm">
+          <li class="mb-2">
+            <a
+              [routerLink]="'/about'"
+              class="text-gray-400 hover:text-white text-decoration-none"
+              >About Us</a
+            >
+          </li>
+          <li class="mb-2">
+            <a
+              href="#"
+              class="text-gray-400 hover:text-white text-decoration-none"
+              >Contact</a
+            >
+          </li>
+          <li class="mb-2">
+            <a
+              href="#"
+              class="text-gray-400 hover:text-white text-decoration-none"
+              >Careers</a
+            >
+          </li>
+          <li class="mb-2">
+            <a
+              href="#"
+              class="text-gray-400 hover:text-white text-decoration-none"
+              >Testimonials</a
+            >
+          </li>
+        </ul>
+      </div>
+
+      <!-- Explore -->
+      <div class="col-6 col-lg-2">
+        <h6 class="font-semibold mb-3">Explore</h6>
+        <ul class="list-unstyled text-sm">
+          <li class="mb-2">
+            <a
+              [routerLink]="'/search'"
+              [queryParams]="{ 'property-type': 'villa' }"
+              class="text-gray-400 hover:text-white text-decoration-none"
+              >Luxury Villas</a
+            >
+          </li>
+          <li class="mb-2">
+            <a
+              [routerLink]="'/search'"
+              [queryParams]="{ 'property-type': 'apartment' }"
+              class="text-gray-400 hover:text-white text-decoration-none"
+              >Apartments</a
+            >
+          </li>
+          <li class="mb-2">
+            <a
+              [routerLink]="'/search'"
+              [queryParams]="{ 'property-type': 'commercial' }"
+              class="text-gray-400 hover:text-white text-decoration-none"
+              >Commercial</a
+            >
+          </li>
+          <li class="mb-2">
+            <a
+              [routerLink]="'/search'"
+              [queryParams]="{ 'property-type': 'plot' }"
+              class="text-gray-400 hover:text-white text-decoration-none"
+              >Plots</a
+            >
+          </li>
+          <li class="mb-2">
+            <a
+              [routerLink]="'/search'"
+              [queryParams]="{ 'property-type': 'form-land' }"
+              class="text-gray-400 hover:text-white text-decoration-none"
+              >Form Lands</a
+            >
+          </li>
+        </ul>
+      </div>
+
+      <!-- Information -->
+      <div class="col-lg-4">
+        <h6 class="font-semibold mb-3">Information</h6>
+        <ul class="list-unstyled text-sm">
+          <li class="mb-2 text-gray-400">Got Queries?</li>
+
+          <li class="mb-2 text-gray-400">
+            <i class="fas fa-envelope me-2 text-indigo-400"></i
+            >info@mydreamyards.com
+          </li>
+        </ul>
+        <div class="mt-4">
+          <a href="#" class="text-white me-3 hover:text-indigo-400"
+            ><i class="fab fa-facebook-f"></i
+          ></a>
+          <a href="#" class="text-white me-3 hover:text-indigo-400"
+            ><i class="fab fa-twitter"></i
+          ></a>
+          <a href="#" class="text-white me-3 hover:text-indigo-400"
+            ><i class="fab fa-instagram"></i
+          ></a>
+          <a href="#" class="text-white hover:text-indigo-400"
+            ><i class="fab fa-linkedin-in"></i
+          ></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="border-top border-gray-700 mt-3 mb-3 pt-3 pt-3 text-center">
+      <p class="text-sm text-gray-500 mb-0">
+        &copy; 2026 My Dream Yards. All rights reserved.
+      </p>
+    </div>
+  </div>
+</footer>
+<app-gobal-modal></app-gobal-modal>

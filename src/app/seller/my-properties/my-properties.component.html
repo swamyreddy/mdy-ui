@@ -1,0 +1,33 @@
+<div class="page-header">
+  <h3>My Properties</h3>
+</div>
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  <div class="col" *ngFor="let item of properties">
+    <button
+      class="btn btn-default btn-primary"
+      [routerLink]="['edit-property', item.id, 'edit']"
+    >
+      Edit
+    </button>
+    <button class="btn btn-default btn-primary" (click)="deleteProperty(item)">
+      Delete
+    </button>
+    <app-property-item
+      [property]="item"
+      (propertySelectedEvent)="onPropertySelected(item)"
+    >
+    </app-property-item>
+  </div>
+</div>
+<div
+  class="row row-cols-1 row-cols-md-3 g-4 mt-1"
+  *ngIf="properties.length === 0"
+>
+  <p>No items found.</p>
+</div>
+<app-gobal-modal
+  [propertyId]="propertyId"
+  [property]="property"
+  #myModal
+  (delete)="onDeleteProperty(propertyId)"
+></app-gobal-modal>

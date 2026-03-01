@@ -1,0 +1,93 @@
+<!-- BREADCRUMB -->
+<div class="container mt-3">
+  <nav class="breadcrums">
+    <small class="text-muted">
+      <a class="link-secondary" [routerLink]="'/home'">Home</a> ›
+      <a class="link-secondary" [routerLink]="'/search'">Properties</a> ›
+      {{ property?.title }}
+    </small>
+  </nav>
+</div>
+
+<!-- MAIN -->
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-xl-12">
+      <div class="card card-body border property_details_wrapper p-4">
+        <div class="row">
+          <div class="col">
+            <h3 class="mb-1">{{ property?.title }}</h3>
+            <small>{{ property?.location }}</small>
+          </div>
+          <div class="col-6">
+            <div>
+              <small>Price Starts From</small>
+              <h3 class="card-title mb-0">
+                {{ property?.price }}
+              </h3>
+              <span>6,533 per sq.ft.</span>
+            </div>
+          </div>
+          <div class="col text-end">
+            <button class="btn btn-primary" (click)="onInterestedButtonClick()">
+              Interested
+            </button>
+          </div>
+        </div>
+        <h5 *ngIf="isInterested">I am Interested in this Property!</h5>
+        <!--Navigation Starts-->
+        <nav
+          class="navbar navbar-expand-lg navbar-light bg-light mt-2 shadow-sm mb-1"
+          style="background-color: #e3f2fd"
+        >
+          <div class="container-fluid">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                  <a
+                    class="nav-link"
+                    routerLinkActive="active"
+                    aria-current="page"
+                    href="#"
+                    routerLink="information"
+                    >Information</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a
+                    class="nav-link"
+                    href="#"
+                    routerLink="floor-plans-pricing"
+                    routerLinkActive="active"
+                    >Floor Plans & Pricing</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a
+                    class="nav-link"
+                    href="#"
+                    routerLink="amenities"
+                    routerLinkActive="active"
+                    >Amenities</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a
+                    class="nav-link"
+                    href="#"
+                    routerLink="gallery"
+                    routerLinkActive="active"
+                    >Gallery</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+        <!--Navigation Ends-->
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>
+<app-interested-modal [propertyId]="propertyId" #myModal></app-interested-modal>

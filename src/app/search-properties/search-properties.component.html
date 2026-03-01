@@ -1,0 +1,156 @@
+<!-- BREADCRUMB -->
+<div class="container mt-3">
+  <nav class="breadcrums">
+    <small class="text-muted">
+      <a class="link-secondary" [routerLink]="'/home'">Home</a> › Search
+      Properties
+    </small>
+  </nav>
+</div>
+
+<!-- MAIN -->
+<div class="container mt-4">
+  <div class="">
+    <div class="row">
+      <!-- FILTERS -->
+      <aside class="col-lg-3">
+        <!-- <div class="filter-box sticky-top">
+          <h6 class="fw-bold mb-3">FILTERS</h6>
+
+          <label class="form-label">Budget</label>
+          <div class="d-flex gap-2 mb-3">
+            <select class="form-select">
+              <option>Min</option>
+            </select>
+            <select class="form-select">
+              <option>Max</option>
+            </select>
+          </div>
+
+          <label class="form-label">Property Type</label>
+          <div class="mb-3">
+            <button class="btn btn-outline-primary btn-sm w-100">
+              Apartment
+            </button>
+          </div>
+
+          <label class="form-label">Bedrooms</label>
+          <div class="d-flex gap-2 mb-3">
+            <button class="btn btn-outline-secondary btn-sm">2 BHK</button>
+            <button class="btn btn-outline-secondary btn-sm">3 BHK</button>
+          </div>
+
+          <label class="form-label">Furnishing</label>
+          <div class="mb-3">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" /> Semi Furnished
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" /> Unfurnished
+            </div>
+          </div>
+        </div> -->
+        <div class="filter-card card shadow-sm filter-box sticky-top">
+          <div class="card-header bg-white fw-semibold">Filter Properties</div>
+
+          <div class="card-body">
+            <!-- Property Type -->
+            <div class="mb-3">
+              <label class="form-label">Property Type</label>
+              <select
+                #propertyType
+                class="form-select"
+                (change)="onFilterChange('propertyType', propertyType.value)"
+              >
+                <option
+                  *ngFor="let type of propertyTypes"
+                  value="{{ type.id }}"
+                >
+                  {{ type.name }}
+                </option>
+              </select>
+            </div>
+
+            <!-- Location -->
+            <div class="mb-3">
+              <label class="form-label">Location</label>
+              <input
+                type="text"
+                #location
+                class="form-control"
+                placeholder="Enter location"
+                (input)="onFilterChange('location', location.value)"
+              />
+            </div>
+
+            <!-- Price Range -->
+            <div class="mb-3">
+              <label class="form-label">Price Range (₹)</label>
+              <div class="d-flex gap-2">
+                <select
+                  #priceRange
+                  id="price-range-select"
+                  class="form-select"
+                  (change)="onFilterChange('priceRange', priceRange.value)"
+                >
+                  <option
+                    *ngFor="let range of priceRanges"
+                    [value]="range.value"
+                  >
+                    {{ range.label }}
+                  </option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Bedrooms -->
+            <div class="mb-3">
+              <label class="form-label">Bedrooms</label>
+              <select
+                #bhkSelect
+                class="form-select"
+                (change)="onFilterChange('bhk', bhkSelect.value)"
+              >
+                <option value="">Any</option>
+                <option value="1">1 BHK</option>
+                <option value="2">2 BHK</option>
+                <option value="3">3 BHK</option>
+                <option value="4">4+ BHK</option>
+              </select>
+            </div>
+
+            <!-- Apply / Reset -->
+            <div class="d-grid gap-2">
+              <button class="btn btn-primary" (click)="applyFilters()">
+                Apply Filters
+              </button>
+              <button
+                class="btn btn-outline-secondary"
+                (click)="resetFilters()"
+              >
+                Reset
+              </button>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- LISTINGS -->
+      <section class="col-lg-9">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h6 class="fw-bold">Showing {{ totalProperties }} Listings</h6>
+          <select
+            class="form-select w-auto"
+            #sort
+            (change)="onFilterChange('sort', sort.value)"
+          >
+            <option value="">All</option>
+            <option value="low_to_high">Price Low to High</option>
+            <option value="high_to_low">Price High to Low</option>
+          </select>
+        </div>
+        <app-property-list></app-property-list>
+      </section>
+    </div>
+  </div>
+</div>

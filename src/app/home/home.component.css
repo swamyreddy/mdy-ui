@@ -1,0 +1,402 @@
+/* Custom CSS for ECOYAP Brand Identity */
+
+:root {
+  --ecoyap-primary: #008080; /* Teal/Dark Green */
+  --ecoyap-accent: #28a745; /* Action Green */
+}
+
+/* Primary Brand Color Overrides */
+.text-primary,
+.btn-primary {
+  --bs-primary: #008080;
+}
+
+/* Accent/Action Color Overrides */
+.btn-success {
+  background-color: #28a745;
+  border-color: #28a745;
+}
+
+/* Header Styling */
+.navbar-brand,
+.navbar-nav .nav-link {
+  color: #fff !important;
+}
+
+/* Hero Section Styling */
+.hero-bg-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.7); /* Darken image for text readability */
+}
+
+/* Search Bar Tabs */
+.nav-tabs-style .btn-tab {
+  border-radius: 0;
+  border-bottom: 2px solid transparent;
+  color: #333;
+  padding: 0.5rem 1.5rem;
+  font-weight: 500;
+}
+
+.nav-tabs-style .btn-tab.active {
+  border-bottom-color: #008080;
+  font-weight: bold;
+  color: #008080;
+}
+@keyframes fadeLoop {
+  0% {
+    /* opacity: 0.1;  */
+    transform: translateY(-5px);
+  }
+  50% {
+    /* opacity: 1;  */
+    transform: translateY(0);
+  }
+  100% {
+    /* opacity: 0.1;  */
+    transform: translateY(-5px);
+  }
+}
+.display-5 {
+  color: #fff;
+  animation: fadeLoop 4s ease-in-out infinite; /* 1.2s duration, 0.2s delay */
+  /* Ensures the element is invisible before the animation starts */
+}
+.homepage-banner {
+  background-image: url("../../assets/images/homepage_banner.png");
+  background-position: center;
+  background-size: cover;
+  padding: 0 20px 20px !important;
+  position: relative;
+
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  z-index: 0;
+}
+.homepage-banner::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
+  z-index: 0;
+}
+.search-bar-inhome {
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.hero-section {
+  position: relative;
+  height: 100vh;
+  min-height: 650px;
+  background:
+    linear-gradient(to right, rgba(26, 32, 44, 0.92), rgba(45, 55, 72, 0.85)),
+    url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><rect fill="%231a202c" width="1200" height="800"/></svg>');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.content-wrapper {
+  width: 90%;
+  max-width: 1200px;
+  padding: 0 20px;
+}
+
+.hero-text {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.hero-title {
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  font-weight: 400;
+  color: white;
+  margin-bottom: 20px;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+.hero-subtitle {
+  font-family: "Inter", sans-serif;
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: 300;
+  letter-spacing: 0.05em;
+}
+
+.search-box {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+}
+
+.tabs-section {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  padding: 0;
+  display: flex;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.tabs-section::-webkit-scrollbar {
+  display: none;
+}
+
+.tab-item {
+  flex: 1;
+  min-width: 140px;
+  padding: 24px 20px;
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
+  font-family: "Inter", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-bottom: 3px solid transparent;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.tab-item:hover {
+  color: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.tab-item.active {
+  color: white;
+  background: rgba(255, 255, 255, 0.1);
+  border-bottom-color: #f59e0b;
+}
+
+.search-area {
+  padding: 48px 40px;
+  background: white;
+}
+
+.search-grid {
+  display: grid;
+  grid-template-columns: 2fr 1.5fr 1.5fr auto;
+  gap: 20px;
+  align-items: end;
+}
+
+.field-wrapper {
+  position: relative;
+}
+
+.field-icon {
+  position: absolute;
+  left: 18px;
+  bottom: 18px;
+  width: 22px;
+  height: 22px;
+  color: #64748b;
+  pointer-events: none;
+}
+
+.search-input {
+  width: 100%;
+  padding: 18px 18px 18px 52px;
+  border: none;
+  border-bottom: 2px solid #e2e8f0;
+  font-family: "Inter", sans-serif;
+  font-size: 1rem;
+  color: #1e293b;
+  background: #f8fafc;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.search-input:focus {
+  background: white;
+  border-bottom-color: #0f172a;
+}
+
+.search-input::placeholder {
+  color: #94a3b8;
+}
+
+.search-btn {
+  padding: 18px 42px;
+  background: linear-gradient(135deg, #0f172a 0%, #334155 100%);
+  color: white;
+  border: none;
+  font-family: "Inter", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.3);
+}
+
+.search-btn:hover {
+  background: linear-gradient(135deg, #1e293b 0%, #475569 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(15, 23, 42, 0.4);
+}
+
+.advanced-options {
+  margin-top: 32px;
+  padding-top: 32px;
+  border-top: 1px solid #e2e8f0;
+}
+
+.options-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.options-title {
+  font-family: "Inter", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #475569;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.filter-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+}
+
+.filter-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 20px;
+  background: #f8fafc;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: "Inter", sans-serif;
+  font-size: 0.95rem;
+  color: #475569;
+}
+
+.filter-option:hover {
+  background: white;
+  border-color: #cbd5e1;
+}
+
+.filter-option.selected {
+  background: #0f172a;
+  color: white;
+  border-color: #0f172a;
+}
+
+.checkbox {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #cbd5e1;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.filter-option.selected .checkbox {
+  background: #f59e0b;
+  border-color: #f59e0b;
+}
+
+.checkmark {
+  width: 12px;
+  height: 12px;
+  color: white;
+  display: none;
+}
+
+.filter-option.selected .checkmark {
+  display: block;
+}
+
+@media (max-width: 1024px) {
+  .search-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .search-btn {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 768px) {
+  .search-area {
+    padding: 32px 24px;
+  }
+
+  .search-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .search-btn {
+    grid-column: span 1;
+  }
+
+  .tabs-section {
+    justify-content: flex-start;
+  }
+
+  .tab-item {
+    min-width: 120px;
+    padding: 20px 16px;
+    font-size: 0.85rem;
+  }
+}
+
+.section-title {
+  margin-top: 0;
+  margin-bottom: 25px;
+  font-size: 30px;
+  font-weight: 900;
+  line-height: 40px;
+  text-transform: uppercase;
+  text-align: center;
+  color: #ffffff;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+}
+.section-title small {
+  display: block;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 18px;
+  text-transform: none;
+}
+.section-title small + span {
+  margin-top: 10px;
+}
+body:not(.rtl) .tabs li {
+  display: inline-block;
+  margin-top: 10px;
+  font-family: "Raleway", sans-serif;
+  font-weight: 700;
+  background-color: #14181c;
+}

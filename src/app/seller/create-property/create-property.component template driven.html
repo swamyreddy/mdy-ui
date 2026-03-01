@@ -1,0 +1,149 @@
+<div class="page-header">
+  <h3>Post a Property</h3>
+  <button (click)="setValues()">Set Values</button>
+  <h6>Submi your Property details form below</h6>
+</div>
+<div class="mt-3">
+  <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+    <div ngModelGroup="propertyData">
+      <div
+        class="form-group mb-3 mt-3"
+        [ngClass]="!title.valid && title.touched ? 'was-validated': ''"
+      >
+        <label for="title">Project Name</label>
+        <input
+          type="text"
+          name="title"
+          id="title"
+          class="form-control"
+          required
+          ngModel
+          #title="ngModel"
+        />
+        <span class="is-invalid invalid-feedback" *ngIf="!title.valid">
+          Please enter Project Name!
+        </span>
+      </div>
+      <div
+        class="form-group mb-3"
+        [ngClass]="!price.valid && price.touched ? 'was-validated': ''"
+      >
+        <label for="price">Price</label>
+        <input
+          type="text"
+          name="price"
+          id="price"
+          class="form-control"
+          ngModel
+          required
+          #price="ngModel"
+        />
+        <span class="is-invalid invalid-feedback" *ngIf="!price.valid">
+          Please enter Price!
+        </span>
+      </div>
+    </div>
+    <div
+      class="form-group mb-3"
+      [ngClass]="!location.valid && location.touched ? 'was-validated': ''"
+    >
+      <label for="location">Location</label>
+      <input
+        type="text"
+        name="location"
+        id="location"
+        class="form-control"
+        ngModel
+        required
+        #location="ngModel"
+      />
+      <span class="is-invalid invalid-feedback" *ngIf="!location.valid">
+        Please enter Location Name!
+      </span>
+    </div>
+    <div
+      class="form-group mb-3"
+      [ngClass]="!defaultPic.valid && defaultPic.touched ? 'was-validated': ''"
+    >
+      <label for="defaultPic">Property Cover Image</label>
+      <input
+        type="file"
+        name="defaultPic"
+        #defaultPic
+        class="form-control"
+        ngModel
+        required
+      />
+      <span class="is-invalid invalid-feedback" *ngIf="!defaultPic.valid">
+        Please upload Project Image!
+      </span>
+    </div>
+    <div
+      class="form-group mb-3"
+      [ngClass]="!propertyType.valid && propertyType.touched ? 'was-validated': ''"
+    >
+      <label for="propertyType">Property Type</label>
+      <select
+        id="propertyType"
+        name="propertyType"
+        class="form-control"
+        required
+        ngModel
+        #propertyType="ngModel"
+      >
+        <option value="villa">Villa</option>
+        <option value="apartment">Apartment</option>
+        <option value="independentHouse">Independent House</option>
+        <option value="plots">Plots</option>
+        <option value="form-lands">Farm Lands</option>
+        <option value="gated-community">Gated Community</option>
+      </select>
+      <span class="is-invalid invalid-feedback" *ngIf="!propertyType.valid">
+        Please select Property Type!
+      </span>
+    </div>
+    <div class="form-group mb-3">
+      <label
+        for="unitType"
+        [ngClass]="!unitType.valid && unitType.touched ? 'was-validated': ''"
+        >Unit Type</label
+      >
+      <select
+        id="unitType"
+        multiple
+        name="unitType"
+        class="form-control"
+        required
+        ngModel
+        #unitType="ngModel"
+      >
+        <option value="1rk">1RK</option>
+        <option value="1bhk">1BHK</option>
+        <option value="2bhk">2 BHK</option>
+        <option value="3bhk">3 BHK</option>
+        <option value="4+bhk">4+ BHK</option>
+      </select>
+      <span class="is-invalid invalid-feedback" *ngIf="!unitType.valid">
+        Please select Unit Type!
+      </span>
+    </div>
+    <button type="submit" [disabled]="!f.valid" class="btn btn-primary">
+      Submit
+    </button>
+  </form>
+</div>
+<hr />
+<div class="row" *ngIf="submitted">
+  <p>Title: {{propertyDetails.title}}</p>
+  <p>Price: {{propertyDetails.price}}</p>
+  <p>Location: {{propertyDetails.location}}</p>
+  <p>
+    Default Pic:
+    <img
+      src="https://img.staticmb.com/mbphoto/property/cropped_images/2022/Apr/27/Photo_h180_w240/60702345_2_WhatsApp-Image-2022-04-27-at-12-18-02-PM--1-_180_240.jpeg"
+      alt="{{propertyDetails.title}}"
+    />
+  </p>
+  <p>Property Type: {{propertyDetails.propertyType}}</p>
+  <p>Unit Type: {{propertyDetails.unitType}}</p>
+</div>

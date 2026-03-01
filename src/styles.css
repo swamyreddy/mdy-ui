@@ -1,0 +1,69 @@
+:root {
+  --red: #e63946;
+  --blue: #457b9d;
+  --dark: #0b0f14;
+  --bg: #f899fa;
+}
+
+.header-dark {
+  background: linear-gradient(90deg, #000, #111);
+}
+
+.badge-nav {
+  border: 1px solid #ffc107;
+  border-radius: 6px;
+  padding: 4px 10px;
+}
+
+.hero-section {
+  padding: 100px 0;
+}
+
+.search-box {
+  background: #fff;
+}
+
+.property-card {
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.price-tag {
+  background: var(--red);
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.why-card {
+  background: #fff;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.footer-dark {
+  background: #0b0f14;
+}
+
+.text-white {
+  color: #fff !important;
+}
+.btn-primary {
+  background-color: #556070 !important;
+  border: none !important;
+  color: #fff !important;
+  font-weight: 500;
+}
+.btn-danger {
+  background: linear-gradient(90deg, #fc466b 0%, #3f5efb 100%) !important;
+  border: none !important;
+  color: #fff !important;
+}
+.btn-bordered {
+  background-color: none !important;
+  border: #fff solid 1px !important;
+  color: #fff !important;
+  font-weight: 500;
+}
