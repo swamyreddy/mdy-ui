@@ -9,7 +9,7 @@
     "test": "ng test",
     "dev:ssr": "set NODE_OPTIONS=--openssl-legacy-provider && ng run hpaAngular:serve-ssr",
     "serve:ssr": "set NODE_OPTIONS=--openssl-legacy-provider && node dist/hpaAngular/server/main.js",
-    "build:ssr": "ng build && ng run hpaAngular:server",
+    "build:ssr": "set NODE_OPTIONS=--openssl-legacy-provider && ng build && ng run hpaAngular:server",
     "prerender": "ng run hpaAngular:prerender"
   },
   "private": true,
