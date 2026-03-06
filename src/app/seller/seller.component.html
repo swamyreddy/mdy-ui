@@ -1,14 +1,48 @@
-<div class="row">
-  <div class="col mt-5 mb-5">
-    <div class="row">
-      <div class="col-md-7">
-        <div class="card card-body">
-          <app-my-properties></app-my-properties>
-        </div>
-      </div>
-      <div class="col-md-5">
-        <div class="card card-body">
-          <router-outlet></router-outlet>
+<div class="container">
+  <div class="row">
+    <div class="col mt-5 mb-5">
+      <div class="card card-body">
+        <h2>Seller Dashboard</h2>
+        <p>
+          Welcome to your seller dashboard! Here you can manage your properties
+          and view your
+        </p>
+        <div class="seller-tabs">
+          <ul class="nav nav-tabs" id="sellerTab" role="tablist">
+            <li class="nav-item" role="presentation">
+              <a
+                class="nav-link"
+                routerLinkActive="active"
+                aria-current="page"
+                href="#"
+                routerLink="my-properties"
+              >
+                My Properties
+              </a>
+            </li>
+            <li class="nav-item" role="presentation">
+              <a
+                class="nav-link"
+                routerLinkActive="active"
+                aria-current="page"
+                href="#"
+                routerLink="create-property"
+              >
+                Add Property
+              </a>
+            </li>
+          </ul>
+          <div class="tab-content mt-3" id="sellerTabContent">
+            <div
+              class="tab-pane fade show active"
+              id="my-properties"
+              role="tabpanel"
+              aria-labelledby="my-properties-tab"
+            >
+              <!-- My Properties Content -->
+              <router-outlet></router-outlet>
+            </div>
+          </div>
         </div>
       </div>
     </div>

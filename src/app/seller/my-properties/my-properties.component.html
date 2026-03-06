@@ -3,12 +3,12 @@
 </div>
 <div class="row row-cols-1 row-cols-md-3 g-4">
   <div class="col" *ngFor="let item of properties">
-    <button
+    <a
       class="btn btn-default btn-primary"
-      [routerLink]="['edit-property', item.id, 'edit']"
+      [routerLink]="['../edit-property', item.id, 'edit']"
     >
       Edit
-    </button>
+    </a>
     <button class="btn btn-default btn-primary" (click)="deleteProperty(item)">
       Delete
     </button>

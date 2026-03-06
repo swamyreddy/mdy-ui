@@ -197,7 +197,7 @@
               id="userDropdown"
               data-bs-toggle="dropdown"
               aria-expanded="false"
-              ><i class="fas fa-user"></i>Hello Swamy!</a
+              ><i class="fas fa-user"></i>Hello {{ userData?.name }}!</a
             >
             <ul
               *ngIf="isAuthenticated"

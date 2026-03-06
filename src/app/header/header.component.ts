@@ -12,6 +12,7 @@ import { PropertyType } from '../shared/propertyType.model';
 import { PropertyService } from '../shared/property.service';
 import { ModalService } from '../shared/modal.service';
 import { AuthComponent } from '../auth/auth.component';
+import { User } from '../auth/user.model';
 
 @Component({
   selector: 'app-header',
@@ -20,6 +21,7 @@ import { AuthComponent } from '../auth/auth.component';
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   collapsed = true;
+  userData: User | null = null;
   private userSub: Subscription;
   @Output() pageTypeSelected = new EventEmitter<string>();
   isAuthenticated: boolean = false;
@@ -52,6 +54,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       this.isHomepage,
     );
     this.userSub = this.authService.user.subscribe((user) => {
+      this.userData = user;
       this.isAuthenticated = !!user;
     });
     this.getPropertyTypes();
