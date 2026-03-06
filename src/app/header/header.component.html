@@ -30,64 +30,10 @@
     </div>
   </div>
 </nav> -->
-
-<div class="header">
-  <div class="container">
-    <nav class="navbar navbar-expand-lg navbar-light">
-      <a
-        class="navbar-brand font-bold text-xl p-0 me-4 mt-1"
-        routerLink="/home"
-      >
-        <!-- <img src="../../assets/images/logos/logo.png" /> -->
-
-        <!-- <svg
-          version="1.2"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 110 110"
-          width="30"
-          height="30"
-        >
-          <style>
-            .s0 {
-              fill: #e63946;
-            }
-            .s1 {
-              fill: #45789d;
-            }
-            .s2 {
-              fill: #e63945;
-            }
-          </style>
-          <g id="Layer 1">
-            <path
-              id="Shape 1"
-              fill-rule="evenodd"
-              class="s0"
-              d="m4.52 104.85v-61.96l43.96 22.33v39.63h-20.8v-15.98l-10.07-3.94v19.92z"
-            />
-            <path
-              id="Shape 2"
-              fill-rule="evenodd"
-              class="s1"
-              d="m58.99 104.85v-31.53l24.74-15.76v47.29z"
-            />
-            <path
-              id="Shape 3"
-              fill-rule="evenodd"
-              class="s2"
-              d="m58.99 61.72v-29.69l46.11-26.8v99.62h-11.73v-65.46z"
-            />
-          </g>
-        </svg>
-
-        <span class="ms-2 logo-text">MyDreamYards</span> -->
-        <img src="../../assets/images/logos/logo_white.png" width="100px" />
-      </a>
-
-      <!-- Location Dropdown added here for large screens -->
-      <!-- <div class="dropdown me-auto d-none d-md-block">
+<!-- Location Dropdown added here for large screens -->
+<!-- <div class="dropdown me-auto d-none d-md-block">
         <button
-          class="btn btn-light dropdown-toggle text-white border-0 py-2 px-3 rounded-xl transition-colors duration-200 hover:bg-white/10"
+          class="btn btn-light dropdown-toggle border-0 py-2 px-3 rounded-xl transition-colors duration-200 hover:bg-white/10"
           type="button"
           id="locationDropdown"
           data-bs-toggle="dropdown"
@@ -110,29 +56,54 @@
           <li><a class="dropdown-item" href="#">All Cities</a></li>
         </ul>
       </div> -->
-      <!-- End Location Dropdown -->
+<!-- End Location Dropdown -->
 
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarNav"
-        aria-controls="navbarNav"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="mainNav">
-        <!-- <ul class="navbar-nav mx-auto">
+<div class="header">
+  <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light flex-wrap">
+      <div class="mobile-header">
+        <a
+          class="navbar-brand font-bold text-xl p-0 mt-1 header-logo"
+          routerLink="/home"
+        >
+          <img src="../../assets/images/logos/logo_white.png" />
+        </a>
+
+        <div class="mobile-header-search align-items-left">
+          <app-search
+            [placeholder]="'Search'"
+            [onlyInputSearch]="'yes'"
+            ngModel="selectedOption"
+            name="selectedOption"
+            ngDefaultControl
+            (selectionChange)="onSelectionChange($event)"
+          ></app-search>
+        </div>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+      <div class="collapse navbar-collapse mobile-menu" id="navbarNav">
+        <ul class="navbar-nav">
           <li class="nav-item"><a class="nav-link" href="#">Buy</a></li>
           <li class="nav-item"><a class="nav-link" href="#">Projects</a></li>
           <li class="nav-item"><a class="nav-link" href="#">Resources</a></li>
-        </ul> -->
-        <ul class="navbar-nav mx-auto">
-          <li class="nav-item dropdown px-4" style="padding-left: 0 !important">
+        </ul>
+        <ul class="navbar-nav mx-auto" *ngIf="!isHomepage">
+          <li
+            class="nav-item dropdown px-4 hide_in_mobile"
+            style="padding-left: 0 !important"
+          >
             <a
-              class="nav-link dropdown-toggle p-0 hover:text-indigo-400 text-white"
+              class="nav-link dropdown-toggle p-0 hover:text-indigo-400"
               href="#"
               id="propertyTypeDropdown"
               role="button"
@@ -156,9 +127,9 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item dropdown px-4">
+          <li class="nav-item dropdown px-4 hide_in_mobile">
             <a
-              class="nav-link dropdown-toggle p-0 hover:text-indigo-400 text-white"
+              class="nav-link dropdown-toggle p-0 hover:text-indigo-400"
               href="#"
               id="priceRangeDropdown"
               role="button"
@@ -181,6 +152,7 @@
               </li>
             </ul>
           </li>
+
           <li>
             <app-search
               [placeholder]="'Search'"
@@ -192,55 +164,56 @@
             ></app-search>
           </li>
         </ul>
-
-        <div class="d-flex gap-2">
-          <!-- <a class="btn btn-outline-warning">Advertise</a> -->
-          <a
-            *ngIf="isAuthenticated"
-            class="btn btn-bordered"
-            href="javascript:void()"
-            routerLink="/seller"
-            routerLinkActive="active"
-            >Sell a Property</a
-          >
-          <a
-            *ngIf="!isAuthenticated"
-            class="btn btn-bordered"
-            href="javascript:void()"
-            (click)="openLogin()"
-            >Sell a Property</a
-          >
-        </div>
-        <div class="d-flex gap-2 position-relative">
-          <a
-            *ngIf="!isAuthenticated"
-            class="btn btn-border text-white"
-            href="javascript:void()"
-            (click)="openLogin()"
-            >Sign In</a
-          >
-          <a
-            *ngIf="isAuthenticated"
-            class="btn btn-border text-white"
-            id="userDropdown"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-            ><i class="fas fa-user"></i
-          ></a>
-          <ul
-            *ngIf="isAuthenticated"
-            class="dropdown-menu dropdown-menu-light rounded-xl shadow-lg"
-            aria-labelledby="locationDropdown"
-          >
-            <li class="dropdown-item">
-              <a class="nav-link" routerLink="/profile">Profile</a>
-            </li>
-            <li class="dropdown-item">
-              <a class="nav-link" href="javascript:void()" (click)="logout()"
-                >Logout</a
-              >
-            </li>
-          </ul>
+        <div class="d-flex gap-2 align-items-right ms-auto header-action-right">
+          <div class="">
+            <!-- <a class="btn btn-outline-warning">Advertise</a> -->
+            <a
+              *ngIf="isAuthenticated"
+              class="btn btn-danger mr-2"
+              href="javascript:void()"
+              routerLink="/seller"
+              routerLinkActive="active"
+              >Sell a Property</a
+            >
+            <a
+              *ngIf="!isAuthenticated"
+              class="btn btn-bordered mr-2"
+              href="javascript:void()"
+              (click)="openLogin()"
+              >Sell a Property</a
+            >
+          </div>
+          <div class="position-relative">
+            <a
+              *ngIf="!isAuthenticated"
+              class="btn btn-bordered"
+              href="javascript:void()"
+              (click)="openLogin()"
+              >Sign up or Log in</a
+            >
+            <a
+              *ngIf="isAuthenticated"
+              class="btn btn btn-bordered"
+              id="userDropdown"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+              ><i class="fas fa-user"></i>Hello Swamy!</a
+            >
+            <ul
+              *ngIf="isAuthenticated"
+              class="dropdown-menu dropdown-menu-light rounded-xl shadow-lg"
+              aria-labelledby="locationDropdown"
+            >
+              <li class="dropdown-item">
+                <a class="nav-link" routerLink="/profile">Profile</a>
+              </li>
+              <li class="dropdown-item">
+                <a class="nav-link" href="javascript:void()" (click)="logout()"
+                  >Logout</a
+                >
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </nav>

@@ -1,8 +1,9 @@
 .navbar-brand img {
-  max-height: 50px;
+  max-height: 40px;
   position: relative;
   top: -5px;
 }
+
 .header-menu {
   position: absolute;
   top: 75px;
@@ -18,6 +19,10 @@
 .logo-text {
   font-family: "ROBOTO";
 }
+.nav-link {
+  color: #fff !important;
+  font-weight: 500;
+}
 .header {
   z-index: 2;
   position: relative;
@@ -30,3 +35,50 @@
 li.nav-item {
   line-height: 34px !important;
 }
+.mobile-header-search {
+  display: none;
+}
+@media (max-width: 768px) {
+  .header-logo img {
+    height: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-logo img {
+    height: 32px;
+  }
+}
+@media (max-width: 991px) {
+  .mobile-menu.show {
+    padding-bottom: 20px;
+  }
+  .header-action-right {
+    margin-top: 20px;
+  }
+  .hide_in_mobile {
+    display: none !important;
+  }
+  .mobile-header-search {
+    display: block;
+  }
+  .logo-text {
+    transform: scale(0.5);
+  }
+  .mobile-header {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+}
+/* .mobile-menu {
+  position: absolute;
+  top: 60px;
+  background: #fff;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #949494;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+} */

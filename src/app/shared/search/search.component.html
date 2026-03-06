@@ -2,116 +2,153 @@
   class="position-relative header-search-input"
   *ngIf="onlyInputSearch == 'yes'"
 >
-  <!-- <label for="location-select">Location</label> -->
-  <i class="fas fa-search d-lg-inline"></i>
-  <input
-    type="text"
-    class="form-control"
-    #searchInput
-    placeholder="Search  City/Locality/Project..."
-    autocomplete="off"
-    (input)="onInputChange($event)"
-  />
-  <ul class="autocomplete-list list-group" *ngIf="filteredLocations.length > 0">
-    <li
-      class="list-group-item"
-      (click)="onSelectLocation(location)"
-      *ngFor="let location of filteredLocations"
-    >
-      {{ location }}
-    </li>
-  </ul>
+  <div class="row">
+    <div class="col-12 col-lg-10">
+      <i class="fas fa-search d-lg-inline"></i>
+      <input
+        type="text"
+        class="form-control"
+        #searchInput
+        placeholder="Search  City/Locality/Project..."
+        autocomplete="off"
+        (input)="onInputChange($event)"
+      />
+      <ul
+        class="autocomplete-list list-group"
+        *ngIf="filteredLocations.length > 0"
+      >
+        <li
+          class="list-group-item"
+          (click)="onSelectLocation(location)"
+          *ngFor="let location of filteredLocations"
+        >
+          {{ location }}
+        </li>
+      </ul>
+    </div>
+    <!-- <div class="col-12 col-lg-2">
+      <button type="submit" class="btn btn-danger btn-lg w-full rounded-xl">
+        <i class="fas fa-search d-lg-inline"></i>
+      </button>
+    </div> -->
+  </div>
 </div>
+<!-- <label for="location-select">Location</label> -->
 <div
   class="search-bar shadow-sm"
   *ngIf="onlyInputSearch == 'no'"
   [ngClass]="selectedPropertyType"
 >
   <form [formGroup]="searchForm" (ngSubmit)="onSearchSubmit()">
-    <div class="d-flex nav-tabs-style">
-      <!-- <button class="btn btn-tab" *ngFor="let type of propertyTypes">
+    <div>
+      <div class="d-flex nav-tabs-style">
+        <!-- <button class="btn btn-tab" *ngFor="let type of propertyTypes">
         {{ type.name }}
       </button> -->
-      <div
-        class="tabs btn-group flex"
-        role="group"
-        *ngIf="onlyInputSearch == 'no'"
-      >
-        <ng-container *ngFor="let type of propertyTypes">
-          <div
-            class="tab-item"
-            [ngClass]="
-              searchForm.value.propertyType === type.id ? 'active' : ''
-            "
-          >
-            <input
-              type="radio"
-              class="btn-check"
-              [id]="type.name"
-              (change)="onPropertyTypeChange(type.name)"
-              formControlName="propertyType"
-              [value]="type.id"
-              autocomplete="off"
-            />
 
-            <label
-              class="btn btn-outline-primary text-primary flex-fill text-left"
-              [for]="type.name"
-            >
-              {{ type.name }}
-            </label>
+        <div
+          class="tabs btn-group flex"
+          role="group"
+          *ngIf="onlyInputSearch == 'no'"
+        >
+          <div class="tab-item active">
+            <a class="btn">Looking to Buy</a>
           </div>
-        </ng-container>
+          <div class="tab-item">
+            <a class="btn">Planning to Sell</a>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="tab-content">
-      <div class="row">
-        <div class="col-12 col-lg-7 position-relative">
-          <!-- <label for="location-select">Location</label> -->
-          <input
-            type="text"
-            class="form-control"
-            #searchInput
-            placeholder="Search {{
-              getSelectedPropertyTypeName(searchForm.value.propertyType)
-            }} or City/Locality/Project..."
-            formControlName="location"
-            autocomplete="off"
-            (input)="onInputChange($event)"
-          />
-          <ul
-            class="autocomplete-list list-group"
-            *ngIf="filteredLocations.length > 0"
-          >
-            <li
-              class="list-group-item"
-              (click)="onSelectLocation(location)"
-              *ngFor="let location of filteredLocations"
-            >
-              {{ location }}
-            </li>
-          </ul>
-        </div>
+      <div class="tab-content">
+        <div class="non_mobile_view">
+          <div class="d-flex search-bar-content property_type_radio_buttons">
+            <ng-container *ngFor="let type of propertyTypes">
+              <div
+                [ngClass]="
+                  searchForm.value.propertyType === type.id ? 'active' : ''
+                "
+              >
+                <input
+                  type="radio"
+                  class="btn-check"
+                  [id]="type.name"
+                  (change)="onPropertyTypeChange($event)"
+                  formControlName="propertyType"
+                  [value]="type.id"
+                  autocomplete="off"
+                />
 
-        <div class="col-12 col-lg-4" *ngIf="onlyInputSearch == 'no'">
-          <label for="price-range-select" class="visually-hidden"
-            >Price Range</label
-          >
-          <select
-            id="price-range-select"
-            class="form-select"
-            formControlName="priceRange"
-          >
-            <option *ngFor="let range of priceRanges" [value]="range.value">
-              {{ range.label }}
-            </option>
-          </select>
+                <label class="btn btn-sm" [for]="type.name">
+                  {{ type.name }}
+                </label>
+              </div>
+            </ng-container>
+          </div>
         </div>
-        <div class="col-12 col-lg-1" *ngIf="onlyInputSearch == 'no'">
-          <button type="submit" class="btn btn-danger btn-lg w-full rounded-xl">
-            <i class="fas fa-search d-lg-inline"></i>
-            <!-- <span class="d-none d-lg-inline ms-2">Search</span> -->
-          </button>
+        <div class="row">
+          <div class="col-12 col-lg-3 mobile_view">
+            <div>
+              <select
+                class="form-select"
+                formControlName="propertyType"
+                (change)="onPropertyTypeChange($event)"
+              >
+                <option *ngFor="let type of propertyTypes" [value]="type?.id">
+                  {{ type.name }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="col-12 col-lg-7 col-sm-12 position-relative">
+            <!-- <label for="location-select">Location</label> -->
+            <input
+              type="text"
+              class="form-control"
+              #searchInput
+              placeholder="Search {{
+                getSelectedPropertyTypeName(searchForm.value.propertyType)
+              }} or City/Locality/Project..."
+              formControlName="location"
+              autocomplete="off"
+              (input)="onInputChange($event)"
+            />
+            <ul
+              class="autocomplete-list list-group"
+              *ngIf="filteredLocations.length > 0"
+            >
+              <li
+                class="list-group-item"
+                (click)="onSelectLocation(location)"
+                *ngFor="let location of filteredLocations"
+              >
+                {{ location }}
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-12 col-lg-4" *ngIf="onlyInputSearch == 'no'">
+            <label for="price-range-select" class="visually-hidden"
+              >Price Range</label
+            >
+            <select
+              id="price-range-select"
+              class="form-select"
+              formControlName="priceRange"
+            >
+              <option *ngFor="let range of priceRanges" [value]="range.value">
+                {{ range.label }}
+              </option>
+            </select>
+          </div>
+          <div class="col-12 col-lg-1" *ngIf="onlyInputSearch == 'no'">
+            <button
+              type="submit"
+              class="btn btn-danger btn-lg w-full rounded-xl"
+            >
+              <i class="fas fa-search d-lg-inline"></i>
+              <!-- <span class="d-none d-lg-inline ms-2">Search</span> -->
+            </button>
+          </div>
         </div>
       </div>
     </div>
