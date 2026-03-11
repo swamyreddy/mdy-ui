@@ -29,8 +29,11 @@
   animation: slideIn 0.3s ease-in-out;
   right: 0;
   left: auto;
-  z-index: 400000;
+  z-index: 3;
   background: #fff;
+}
+.modal-backdrop {
+  z-index: 2;
 }
 h2 {
   margin-bottom: 1rem;

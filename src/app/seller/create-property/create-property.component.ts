@@ -14,7 +14,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
 import { CustomValidators } from 'src/app/helpers/validations/custom-validators';
@@ -69,6 +69,7 @@ export class CreatePropertyComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private route: ActivatedRoute,
     private modalService: ModalService,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -126,7 +127,7 @@ export class CreatePropertyComponent implements OnInit, OnDestroy {
         Validators.min(0),
         Validators.max(100),
       ]),
-      projectAreaValue: new FormControl(null, [Validators.required]),
+      projectAreaValue: new FormControl(null, []),
       projectAreaUnit: new FormControl(null),
     });
     this.propertyCreationForm.statusChanges.subscribe((change) => {
@@ -518,23 +519,54 @@ export class CreatePropertyComponent implements OnInit, OnDestroy {
       );
       if (this.isEditMode) {
         formData.append('id', this.propertyId);
-        this.propertyService.editProperty(formData).subscribe((data: any) => {
-          this.propertyPhotos.clear();
 
-          this.clearFormData();
-          this.loadPropertyDetails();
-          this.propertyService.updateProperty(data.data);
-          this.alertService.success('Property Updated Successfully!');
+        this.propertyService.editProperty(formData).subscribe({
+          next: (data: any) => {
+            this.propertyPhotos.clear();
+            this.clearFormData();
+            this.loadPropertyDetails();
+            this.propertyService.updateProperty(data.data);
+
+            this.alertService.success('Property Updated Successfully!');
+            this.router.navigateByUrl('/seller/my-properties');
+          },
+
+          error: (error) => {
+            console.error('Update property error:', error);
+
+            const message =
+              error?.error?.message ||
+              'Failed to update property. Please try again.';
+
+            this.alertService.error(message);
+          },
         });
       } else {
-        this.propertyService.addProperty(formData).subscribe((data: any) => {
-          this.selectedAmenities.clear();
-          this.propertyPhotos.clear();
-          this.clearFormData();
-          this.propertyService.updateProperty(data.data);
-          this.alertService.success('Property Added Successfully!');
+        this.propertyService.addProperty(formData).subscribe({
+          next: (data: any) => {
+            this.selectedAmenities.clear();
+            this.propertyPhotos.clear();
+            this.clearFormData();
+
+            this.propertyService.updateProperty(data.data);
+
+            this.alertService.success('Property Added Successfully!');
+            this.router.navigateByUrl('/seller/my-properties');
+          },
+
+          error: (error) => {
+            console.error('Add property error:', error);
+
+            const message =
+              error?.error?.message ||
+              'Failed to add property. Please try again.';
+
+            this.alertService.error(message);
+          },
         });
       }
+    } else {
+      this.alertService.warn('Please fill all required fields!');
     }
   }
   clearFormData() {

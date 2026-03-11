@@ -53,6 +53,27 @@ export class AuthService {
       );
   }
 
+  sendOTP(phone: { phone: string }) {
+    return this.http
+      .post(this.baseUrl + '/auth/send-otp', phone)
+      .pipe(catchError(this.handleError));
+  }
+  verifyOTP(data: { phone: string; otp: string }) {
+    return this.http
+      .post(this.baseUrl + '/auth/verifty-otp', data)
+      .pipe(catchError(this.handleError));
+  }
+  sendResetPwdOtp(phone: string) {
+    return this.http.post('/auth/send-reset-pwd-otp', { phone });
+  }
+
+  verifyResetPwdOtp(phone: string, otp: string) {
+    return this.http.post('/auth/verify-reset-pwd-otp', { phone, otp });
+  }
+
+  resetPassword(phone: string, password: string) {
+    return this.http.post('/auth/reset-password', { phone, password });
+  }
   signin(data: any) {
     return this.http
       .post<authResponseData>(this.baseUrl + '/auth/login', data)
