@@ -33,7 +33,7 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
           source: "dist/*"
-          target: "/mdy-ui-prod"
+          target: "/home/ubuntu/mdy-ui-prod"
 
       - name: Restart SSR server
         uses: appleboy/ssh-action@master
@@ -42,5 +42,5 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            cd /mdy-ui-prod
+            cd /home/ubuntu/mdy-ui-prod
             pm2 restart mdy-ui || pm2 start dist/hpaAngular/server/main.js --name angular-ssr
