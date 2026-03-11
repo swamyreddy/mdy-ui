@@ -29,34 +29,27 @@
   animation: slideIn 0.3s ease-in-out;
   right: 0;
   left: auto;
-  z-index: 400000;
+  z-index: 3;
   background: #fff;
+}
+.modal-backdrop {
+  z-index: 2;
+}
+h2 {
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
 
-  h2 {
-    margin-bottom: 1rem;
-    font-size: 1.2rem;
-  }
+input {
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
 
-  input {
-    padding: 0.5rem;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-  }
-
-  .actions {
-    display: flex;
-    justify-content: flex-end;
-    gap: 1rem;
-
-    button {
-      padding: 0.5rem 1rem;
-      border: none;
-      background: #007bff;
-      color: white;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-  }
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
 }
 
 @keyframes fadeIn {

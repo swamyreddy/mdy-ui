@@ -8,7 +8,7 @@
 }
 
 .search-bar .tab-content {
-  padding: 10px 15px 15px 15px;
+  padding: 5px 15px 15px 15px;
 }
 .search-bar.tabs {
   padding-left: 10px;
@@ -17,11 +17,27 @@
   padding: 10px;
   background: #9b53b5;
 }
+.tab-item a {
+  font-size: 14px;
+  color: #fff !important;
+}
+.tab-item.active a {
+  color: #000 !important;
+  background-color: linear-gradient(90deg, #fc466b 0%, #3f5efb 100%) !important;
+}
+.property_type_radio_buttons .btn {
+  font-size: 12px;
+}
 .search-bar .tab-content,
 .search-bar .tab-item.active,
 .btn-check:checked + .btn {
   background: #f7f7f7;
   color: #000 !important;
+}
+.btn-check:checked + .btn {
+  border: none !important;
+  font-weight: bold;
+  color: #9b53b5 !important;
 }
 
 /* On screens larger than tablet, center the content for better aesthetics */
@@ -70,7 +86,12 @@
   box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.15); /* Softer focus shadow */
   outline: 0; /* Remove default outline */
 }
-
+.mobile_view {
+  display: none !important;
+}
+.non_mobile_view {
+  display: block !important;
+}
 /* On smaller screens, add a bit more vertical spacing between stacked elements */
 @media (max-width: 991.98px) {
   .search-bar .row > div {
@@ -79,7 +100,14 @@
   .search-bar .row > div:last-child {
     margin-bottom: 0; /* No margin after the last element (the button) */
   }
+  .mobile_view {
+    display: block !important;
+  }
+  .non_mobile_view {
+    display: none !important;
+  }
 }
+
 .autocomplete-list {
   position: absolute; /* Position the list relative to its parent .col-lg-3 */
   top: 100%; /* Place it right below the input field */
@@ -121,13 +149,6 @@
   border: none !important;
   padding-top: 0;
 }
-.btn-group label {
-  font-size: 14px;
-  color: #fff !important;
-}
-.btn-group.active label {
-  color: #000 !important;
-}
 
 .btn-group .btn:first-child {
   border-top-left-radius: 0.5rem;
@@ -141,12 +162,21 @@
 .header-search-input input {
   height: 34px !important;
   border-radius: 0 !important;
-  text-indent: 20px;
+
+  min-width: 250px;
 }
 .header-search-input i {
   position: absolute;
-  top: 10px;
-  left: 8px;
+  /* top: 10px; */
+  right: 0;
+  height: 34px;
+  width: 35px;
+  color: #fff;
+  background: #000;
+  text-align: center;
+  align-items: center;
+  display: flex !important;
+  justify-content: center;
 }
 .search-bar {
   transition:
@@ -182,4 +212,9 @@
 /* FarmLand */
 .search-bar.formland {
   /* background: linear-gradient(135deg, #f1f8e9, #ffffff); */
+}
+@media (max-width: 575.98px) {
+  .header-search-input input {
+    min-width: auto;
+  }
 }

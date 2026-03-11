@@ -17,6 +17,8 @@ export class ModalService {
 
   open(component: Type<any>, config?: any) {
     console.log(component, 'component');
+    this.componentSource.next(null);
+    this.openModalSource.next(false);
     const resultSubject = new Subject<any>();
     this.componentSource.next({ component, config, resultSubject });
     this.openModalSource.next(true);

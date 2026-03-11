@@ -86,9 +86,10 @@ export class SearchComponent implements OnInit, AfterViewInit {
 
   getPropertyTypes() {
     this.propertyTypes = this.propertyService.getPropertyTypes();
-    this.propertyTypes.unshift({ id: 0, name: 'All', short_name: 'all' });
+    this.propertyTypes.push({ id: 0, name: 'All', short_name: 'all' });
   }
-  onPropertyTypeChange(val: string) {
+  onPropertyTypeChange(evt: Event) {
+    const val = (evt.target as HTMLInputElement).value;
     this.selectedPropertyType = val.toLowerCase().replace(/\s+/g, '');
   }
   onInputChange(event: any) {

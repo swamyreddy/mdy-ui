@@ -38,15 +38,18 @@ export class GlobalModalComponent implements OnInit {
       this.modalService.openModal$.subscribe((open) => (this.isOpen = open)),
     );
 
-    this.sub.add(
-      this.modalService.component$.subscribe((data) => {
-        if (data?.component) {
-          this.loadComponent(data);
-        } else {
-          this.container?.clear();
-        }
-      }),
-    );
+    // this.sub.add(
+    //   this.modalService.component$.subscribe((data) => {
+    //     this.container?.clear();
+    //     alert(2);
+    //     if (data?.component) {
+    //       this.loadComponent(data);
+    //     } else {
+    //       alert(3);
+    //       this.container?.clear();
+    //     }
+    //   }),
+    // );
   }
   @ViewChild('modalRef') modalRef!: ElementRef;
   ngOnInit(): void {}
@@ -79,7 +82,7 @@ export class GlobalModalComponent implements OnInit {
       Object.assign(ref.instance, data.config);
       this.title = data.config?.title;
     }
-    ref.instance.closeModal.subscribe((result: any) => {
+    ref.instance.closeModal?.subscribe((result: any) => {
       data.resultSubject.next(result);
       data.resultSubject.complete();
       this.modalService.close();

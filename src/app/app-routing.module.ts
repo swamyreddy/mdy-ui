@@ -17,6 +17,7 @@ import { SellerComponent } from './seller/seller.component';
 import { SearchPropertiesComponent } from './search-properties/search-properties.component';
 import { ProfileComponent } from './auth/profile/profile.component';
 import { AboutComponent } from './pages/about/about.component';
+import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -48,6 +49,7 @@ const appRoutes: Routes = [
   },
   { path: 'login', component: AuthComponent },
   { path: 'signup', component: AuthComponent },
+  { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'profile', canActivate: [AuthGuard], component: ProfileComponent },
   { path: 'page-not-found', component: PageNotFoundComponent },
   { path: '**', redirectTo: 'page-not-found' },

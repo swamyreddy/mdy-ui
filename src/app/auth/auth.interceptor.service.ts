@@ -27,7 +27,6 @@ export class AuthInterceptorService implements HttpInterceptor {
         url: `${this.baseUrl}${req.url}`,
       });
     }
-    console.log('Hello TOken BEFORE');
     // ✅ Only enable credentials in browser (important for SSR)
     // if (isPlatformBrowser(this.platformId)) {
 

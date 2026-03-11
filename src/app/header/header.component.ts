@@ -12,6 +12,7 @@ import { PropertyType } from '../shared/propertyType.model';
 import { PropertyService } from '../shared/property.service';
 import { ModalService } from '../shared/modal.service';
 import { AuthComponent } from '../auth/auth.component';
+import { User } from '../auth/user.model';
 
 @Component({
   selector: 'app-header',
@@ -20,10 +21,11 @@ import { AuthComponent } from '../auth/auth.component';
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   collapsed = true;
+  userData: User | null = null;
   private userSub: Subscription;
   @Output() pageTypeSelected = new EventEmitter<string>();
   isAuthenticated: boolean = false;
-  canBreadCrumbsVisible: boolean = true;
+  isHomepage: boolean = true;
   propertyTypes: PropertyType[] = [
     { id: 0, short_name: 'project_type', name: 'Project Type' },
   ];
@@ -42,8 +44,17 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.canBreadCrumbsVisible = this.router.url !== '/home';
+    this.router.events.subscribe(() => {
+      this.isHomepage = this.router.url === '/home' || this.router.url === '/';
+    });
+    console.log(
+      'Current URL:',
+      this.router.url,
+      'isHomepage:',
+      this.isHomepage,
+    );
     this.userSub = this.authService.user.subscribe((user) => {
+      this.userData = user;
       this.isAuthenticated = !!user;
     });
     this.getPropertyTypes();
